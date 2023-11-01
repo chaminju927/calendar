@@ -1,46 +1,30 @@
 import moment from "moment";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function MonthComponent() {
-  //const [todayDate, setTodayDate] = useState(moment().format("YYYYMMDD"));
   const [month, setMonth] = useState(moment().format("YYYY.MM"));
 
-  //useEffect(() => {}, []);
-
   const prevMonth = () => {
-    const monthTxt = moment().format("YYYYMMDD"); //이번달 string값
-
-    const prev = moment().add(-1, "months").format("YYYY.MM");
+    const currentMonth = moment(month, "YYYY.MM");
+    const prev = currentMonth.subtract(1, "months").format("YYYY.MM");
     setMonth(prev);
-    const minMonth = moment().add(-3, "months").format("YYYYMMDD");
-    if (parseInt(monthTxt) < parseInt(minMonth)) {
-      return false;
+    // 이전 3개월까지만 조회가능. moment.js의 isBefore()
+    const minMonth = currentMonth
+      .clone()
+      .subtract(3, "months")
+      .format("YYYY.MM");
+    if (currentMonth.isBefore(minMonth, "month")) {
+      return;
     }
   };
+
   const nextMonth = () => {
-    const next = moment().add(1, "months").format("YYYY.MM");
+    const currentMonth = moment(month, "YYYY.MM");
+    const next = currentMonth.add(1, "months").format("YYYY.MM");
     setMonth(next);
-    const monthTxt = moment().format("YYYYMMDD"); //이번달 string값
-
-    const maxMonth = moment().add(3, "months").format("YYYYMMDD");
-    if (parseInt(maxMonth) < parseInt(monthTxt)) {
-      return false;
-    }
-  };
-
-  //클릭시 월 이동
-  const clickMonth = (e) => {
-    const action = e.target.value;
-    console.log(action);
-    switch (action) {
-      case "move-prev":
-        prevMonth();
-        break;
-      case "move-next":
-        nextMonth();
-        break;
-      default:
-        return;
+    const maxMonth = moment().add(3, "months").format("YYYY.MM");
+    if (currentMonth.isAfter(maxMonth, "month")) {
+      return;
     }
   };
 
@@ -51,17 +35,15 @@ function MonthComponent() {
           <button
             className="prev_crcl"
             id="cal_prev"
-            value="move-prev"
-            onClick={clickMonth}
+            onClick={prevMonth}
           ></button>
-          <span class="Month" id="dateTxt">
+          <span className="Month" id="dateTxt">
             {month}
           </span>
           <button
             className="next_crcl"
             id="cal_next"
-            value="move-next"
-            onClick={clickMonth}
+            onClick={nextMonth}
           ></button>
         </div>
       </div>
