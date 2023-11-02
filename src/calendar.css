@@ -1,7 +1,11 @@
 @charset "utf-8";
 
+#week_0 {
+  background: rgb(54 58 84 / 3%);
+}
 /* 달력 기본 - 상단 월 이동 영역 */
 .calendar {
+  font-size: 10px;
 }
 .calendar_top {
   position: relative;
@@ -78,6 +82,7 @@
   border-right: 1px solid #979da5;
   border-bottom: 1px solid #fff;
   padding: 6px;
+  font-size: 12px;
 }
 .tbl_calendar th:first-child {
   border-radius: 15px 0 0 0; /*color:#ff0000;*/
@@ -153,8 +158,9 @@
 }
 /* 이번달이 아닌경우 회색 처리*/
 .tbl_calendar .other_month {
-  background: rgb(54 58 84 / 20%);
-  border-top: 1px solid #e0e0e0;
+  background: rgb(54 58 84 / 10%);
+  /* border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0; */
 }
 
 /* 재택근무 : 달력 기본 - 날짜별 */
