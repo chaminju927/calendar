@@ -1,41 +1,54 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+
+const originMoment = moment();
+//이 달의 시작하는 주
+const originFirstWeek = moment().startOf("month").week();
+//이 달의 마지막 주
+const originlLastWeek =
+  moment().endOf("month").week() === 1 ? 53 : moment().endOf("month").week();
 
 function CalendarComoponent(props) {
-  const originMoment = moment(); //moment는 mutable이므로 복제해서 사용
-  const cloneMoment = originMoment.clone();
-
+  const [getMoment, setMoment] = useState(originMoment);
+  const [firstWeek, setFirstWeek] = useState(originFirstWeek);
+  const [lastWeek, setLastWeek] = useState(
+    getMoment.endOf("month").week() === 1 ? 53 : getMoment.endOf("month").week()
+  );
+  // props로 받아온 클릭 횟수
   const [getClicked, setClicked] = useState(0);
-  const [today, setToday] = useState(cloneMoment);
-  const firstWeek = cloneMoment.startOf("month").week(); // 해당 월의 첫 주
-  const lastWeek =
-    cloneMoment.endOf("month").week() === 1
-      ? 53
-      : cloneMoment.endOf("month").week(); // 해당 월의 마지막주. 1년은 총 53주
 
-  const calendarTable = [];
+  const momentChange = (useCallback =
+    (() => {
+      getClicked > 0
+        ? setMoment(getMoment.add(getClicked, "month"))
+        : setMoment(getMoment.subtract(getClicked * -1, "months"));
+      setFirstWeek(getMoment.startOf("month").week());
+      setLastWeek(
+        getMoment.endOf("month").week() === 1
+          ? 53
+          : getMoment.endOf("month").week()
+      );
+    },
+    [getClicked]));
 
   useEffect(() => {
-    setClicked(props.clicked);
-    drawTable();
-    console.log(getClicked);
-    //console.log(today);
-
-    //클릭 수에 따라 today상태 변경
-    if (getClicked > 0) {
-      setToday(moment().add(getClicked));
-    } else if (getClicked < 0) {
-      setToday(moment.abstract(getClicked));
-    }
-    // console.log(cloneMoment.startOf("year").week()); // 이번 주가 몇번째 주인지 return
-    // console.log(moment().date()); //오늘 날짜
-    // console.log(moment().startOf("year").week(44).startOf("week")); //이번주의 첫번째 일
+    console.log(moment().startOf("month").week());
+    console.log(firstWeek);
+    // var clicked = props.clicked;
+    // setClicked(getClicked + clicked);
+    // console.log(getClicked);
+    // //클릭값 변화 있을시, moment,firstWeek lastWeek값 변경
+    // getClicked !== 0 && momentChange();
+    // console.log(firstWeek);
+    // console.log(lastWeek);
+    // drawTable();
   }, [getClicked]);
 
   const drawTable = () => {
-    let week = firstWeek;
-    for (week; week <= lastWeek; week++) {
-      let weekRow = [];
+    var calendarTable = [];
+
+    for (let week = firstWeek; week <= lastWeek; week++) {
+      var weekRow = [];
       //첫번째 셀 공란으로 처리
       weekRow.push(
         <td>
@@ -48,34 +61,42 @@ function CalendarComoponent(props) {
           </div>
         </td>
       );
-      //이번 주의 첫 요일부터 시작
+      //이번 주의 첫 요일부터 row에 push
       for (let i = 0; i < 7; i++) {
-        var days = cloneMoment
-          .startOf("year")
-          .week(week)
-          .startOf("week")
-          .add(week - firstWeek + i, "days");
-        //console.log(days);
-        weekRow.push(
-          <td key={week}>
-            <div className="other_month" id={week}>
-              <div className="date_head">
-                <span className="day">{days.format("D")}</span>
-                <span className="day_title"></span>
-              </div>
-              <div className="date_body"></div>
-            </div>
-          </td>
-        );
+        var days =
+          getClicked >= 0
+            ? getMoment
+                .add(getClicked, "months")
+                .startOf("year")
+                .week(week)
+                .startOf("week")
+                .add(week - firstWeek + i, "days")
+            : getMoment
+                .subtract(getClicked * -1, "months")
+                .startOf("year")
+                .week(week)
+                .startOf("week")
+                .add(week - firstWeek + i, "days");
       }
-      //키 값 수정하기!!
+      weekRow.push(
+        <td key={week}>
+          <div className="other_month" id={week}>
+            <div className="date_head">
+              <span className="day">{days.format("D")}</span>
+              <span className="day_title"></span>
+            </div>
+            <div className="date_body"></div>
+          </div>
+        </td>
+      );
       calendarTable.push(
         <tr key={week - firstWeek + 1} id={`week_${week - firstWeek + 1}`}>
           {weekRow}
         </tr>
       );
     }
-    return calendarTable;
+
+    // return calendarTable;
   };
 
   return (
