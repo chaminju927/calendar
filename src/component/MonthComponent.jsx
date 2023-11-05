@@ -1,6 +1,11 @@
 import moment from "moment";
 import { useState } from "react";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import CalendarComponent from "./CalendarComponent";
+import IconButton from "@mui/material/IconButton";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+
 const now = moment().clone();
 function MonthComponent() {
   const [currentMonth, setCurrentMonth] = useState(now);
@@ -38,21 +43,22 @@ function MonthComponent() {
   return (
     <div>
       <div className="calendar_top">
-        <div className="navi_area">
-          <button
-            className="prev_crcl"
-            id="cal_prev"
-            onClick={prevMonth}
-          ></button>
-          <span className="Month" id="dateTxt">
-            {currentMonth.format("YYYY.MM")}
-          </span>
-          <button
-            className="next_crcl"
-            id="cal_next"
-            onClick={nextMonth}
-          ></button>
-        </div>
+        <IconButton onClick={prevMonth}>
+          <KeyboardArrowLeftIcon />
+        </IconButton>
+        {/* <button className="prev_crcl" id="cal_prev" onClick={prevMonth}>
+            &lt;
+          </button> */}
+        <span className="Month" id="dateTxt">
+          {currentMonth.format("YYYY.MM")}
+        </span>
+        <IconButton onClick={nextMonth}>
+          <KeyboardArrowRightIcon />
+        </IconButton>
+        {/* <button className="next_crcl" id="cal_next" onClick={nextMonth}>
+          {" "}
+          &gt;
+        </button> */}
       </div>
       <div>
         <CalendarComponent currentMonth={currentMonth} />

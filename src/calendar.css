@@ -36,7 +36,7 @@
 }
 
 .tbl_calendar {
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 1;
   width: 100%;
   margin-bottom: 1px;
@@ -97,4 +97,15 @@
 .tbl_calendar td.week div label:before {
   margin-right: 0px;
   color: #444;
+}
+
+.other-month {
+  background: rgb(54 58 84 / 10%);
+}
+.Month {
+  font-size: 25px;
+}
+.navi_area {
+  display: inline-block;
+  vertical-align: auto;
 }

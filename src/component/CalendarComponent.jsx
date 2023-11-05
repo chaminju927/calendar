@@ -5,7 +5,11 @@ function CalendarComponent({ currentMonth }) {
   const firstDayOfMonth = currentMonth.clone().startOf("month").weekday(0); //이번달 첫 주의 시작일(일요일부터 시작)
   const firstWeek = firstDayOfMonth.week(); // 이번달 첫주가 몇번째 주인지
   const lastDayOfMonth = currentMonth.clone().endOf("month");
-  const lastWeek = lastDayOfMonth.isoWeek();
+  // const lastWeek = lastDayOfMonth.isoWeek();
+
+  // const lastDayOfMonth = currentMonth.clone().endOf("month");
+  const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week();  //이번달 마지막 주
+  // const lastDayOfWeek = lastDayOfMonth.day(); // 마지막 날의 요일
 
   useEffect(() => {
     console.log(firstDayOfMonth);
