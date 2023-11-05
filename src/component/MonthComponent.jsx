@@ -1,35 +1,39 @@
 import moment from "moment";
-import { useState, useEffect } from "react";
-import CalendarComoponent from "./CalendarComponent";
-
+import { useState } from "react";
+import CalendarComponent from "./CalendarComponent";
+const now = moment().clone();
 function MonthComponent() {
-  const [month, setMonth] = useState(moment().format("YYYY.MM"));
-  const [clicked, setClicked] = useState(0); //props로 전달하는 클릭 수
+  const [currentMonth, setCurrentMonth] = useState(now);
 
-  // useEffect(() => {
-  //   console.log(clicked);
-  // }, [clicked]);
   const prevMonth = () => {
-    const currentMonth = moment(month, "YYYY.MM");
-    var prev = currentMonth.clone().subtract(1, "months").format("YYYY.MM");
-    setMonth(prev);
-    setClicked(clicked - 1);
-    // const minMonth = moment().subtract(5, "months").format("YYYY.MM");
-    // if (currentMonth.isBefore(minMonth, "month")) {
-    //   return;
-    // }
+    setCurrentMonth(currentMonth.clone().subtract(1, "month"));
   };
 
   const nextMonth = () => {
-    const currentMonth = moment(month, "YYYY.MM");
-    const next = currentMonth.clone().add(1, "months").format("YYYY.MM");
-    setMonth(next);
-    setClicked(clicked + 1);
-    // const maxMonth = moment().add(5, "months").format("YYYY.MM");
-    // if (currentMonth.isAfter(maxMonth, "month")) {
-    //   return;
-    // }
+    setCurrentMonth(currentMonth.clone().add(1, "month"));
   };
+
+  //   const prevMonth = () => {
+  //     const currentMonth = moment(month, "YYYY.MM");
+  //     var prev = currentMonth.clone().subtract(1, "months").format("YYYY.MM");
+  //     setMonth(prev);
+  //     setClicked(clicked - 1);
+  //     // const minMonth = moment().subtract(5, "months").format("YYYY.MM");
+  //     // if (currentMonth.isBefore(minMonth, "month")) {
+  //     //   return;
+  //     // }
+  //   };
+
+  //   const nextMonth = () => {
+  //     const currentMonth = moment(month, "YYYY.MM");
+  //     const next = currentMonth.clone().add(1, "months").format("YYYY.MM");
+  //     setMonth(next);
+  //     setClicked(clicked + 1);
+  //     // const maxMonth = moment().add(5, "months").format("YYYY.MM");
+  //     // if (currentMonth.isAfter(maxMonth, "month")) {
+  //     //   return;
+  //     // }
+  //   };
 
   return (
     <div>
@@ -41,7 +45,7 @@ function MonthComponent() {
             onClick={prevMonth}
           ></button>
           <span className="Month" id="dateTxt">
-            {month}
+            {currentMonth.format("YYYY.MM")}
           </span>
           <button
             className="next_crcl"
@@ -51,7 +55,7 @@ function MonthComponent() {
         </div>
       </div>
       <div>
-        <CalendarComoponent clicked = {clicked} />
+        <CalendarComponent currentMonth={currentMonth} />
       </div>
     </div>
   );
