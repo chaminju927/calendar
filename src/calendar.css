@@ -1,24 +1,11 @@
-@charset "utf-8";
-
 #week_0 {
   background: rgb(54 58 84 / 3%);
 }
-/* 달력 기본 - 상단 월 이동 영역 */
-.calendar {
-  font-size: 10px;
-}
-.calendar_top {
-  position: relative;
-  height: 38px;
-  margin-bottom: 0px;
-  text-align: center;
-}
+
 .calendar_top {
   text-align: center;
 }
-.calendar_top div {
-  display: inline-block;
-}
+
 .calendar_top .prev_crcl {
   width: 24px;
   height: 24px;
@@ -27,9 +14,9 @@
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  /* background: url(/resources/img/btn/btn_sp_paging.png) no-repeat 7px -94px;*/
   text-indent: -9999em;
 }
+
 .calendar_top .next_crcl {
   width: 24px;
   height: 24px;
@@ -38,33 +25,16 @@
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  /* background: url(/resources/img/btn/btn_sp_paging.png) no-repeat 10px -144px; */
   text-indent: -9999em;
 }
-.calendar_top .Month {
-  position: relative;
-  top: 3px;
-  display: inline-block;
-  font-size: 21px;
-  line-height: 18px;
-  margin: 0 10px;
-}
 
-.calendar_top .navi_area {
-}
-
-.calendar_top .title_area {
-}
-.calendar_top .title_area .title_calendar {
+.calendar_top .title_calendar {
   color: #2497cf;
   font-size: 24px;
   font-weight: 700;
   line-height: 1;
 }
-.calendar_top .title_area span {
-}
 
-/* 달력 기본 - 날짜별 */
 .tbl_calendar {
   border-collapse: separate;
   border-spacing: 1;
@@ -72,9 +42,11 @@
   margin-bottom: 1px;
   border-bottom: 1px solid rgb(54 58 84 / 60%);
 }
+
 .tbl_calendar table {
-  width: 100%; /*min-width:1240px; border-left:1px solid #eaedf1;*/
+  width: 100%;
 }
+
 .tbl_calendar th {
   background: #363a54;
   color: #fff;
@@ -84,268 +56,45 @@
   padding: 6px;
   font-size: 12px;
 }
+
 .tbl_calendar th:first-child {
-  border-radius: 15px 0 0 0; /*color:#ff0000;*/
+  border-radius: 15px 0 0 0;
 }
+
 .tbl_calendar th:last-child {
   border-radius: 0 15px 0 0;
   color: #85e3df;
 }
+
 .tbl_calendar th.sun {
   background: #363a54;
   color: #ff0000;
-} /*일요일 Title 배경 컬러*/
+}
+
 .tbl_calendar th.week_all {
   color: #fff;
-} /*background:#edf5f8; color: #444;*/
+}
+
 .tbl_calendar td {
   border-bottom: 1px solid #eaedf1;
   border-right: 1px solid #eaedf1;
   color: #70767f;
   height: 100px;
 }
-/* .tbl_calendar td:first-child {border-left:1px solid #eaedf1;} */
+
 .tbl_calendar td > div {
   color: #70767f;
   height: 100%;
   padding: 5px;
 }
 
-/* th .week_all { background:#edf5f8; } */
-.tbl_calendar th.week_all label:before {
-  color: #444;
-}
 .tbl_calendar td.week {
   background: #f5f5f5;
   text-align: center;
   border-bottom: 1px solid #dedede;
 }
-.tbl_calendar td.week div {
-  display: block;
-  height: 30px;
-}
+
 .tbl_calendar td.week div label:before {
   margin-right: 0px;
   color: #444;
-}
-
-/* 일자  header*/
-.tbl_calendar td .date_head {
-}
-.tbl_calendar td .date_head .day {
-  margin-right: 5px;
-}
-.tbl_calendar td .date_head .today {
-  display: inline-block;
-  position: relative;
-  top: -2px;
-  margin-bottom: -4px;
-  padding: 0px;
-  background: #778eea;
-  border-radius: 50%;
-  width: 21px;
-  height: 21px;
-  font-size: 12px;
-  line-height: 20px;
-  color: #fff;
-  text-align: center;
-}
-/* 일요일, 휴일 글자 색상 설정*/
-.tbl_calendar td:first-child > div,
-.tbl_calendar .day_off .day,
-.tbl_calendar .day_off .day_title {
-  color: #f3374e;
-}
-/* 이번달이 아닌경우 회색 처리*/
-.tbl_calendar .other_month {
-  background: rgb(54 58 84 / 10%);
-  /* border-top: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0; */
-}
-
-/* 재택근무 : 달력 기본 - 날짜별 */
-.tbl_calendar_telecommuting {
-  border-collapse: separate;
-  border-spacing: 1;
-  width: 100%;
-  margin-bottom: 1px;
-}
-.tbl_calendar_telecommuting table {
-  width: 100%;
-}
-.tbl_calendar_telecommuting th {
-  background: #6f7780 !important;
-  color: #fff !important;
-  padding: 6px !important;
-  height: 30px !important;
-}
-.tbl_calendar_telecommuting th:first-child {
-  background: #d70f68 !important;
-} /*일요일 Title 배경 컬러*/
-.tbl_calendar_telecommuting td {
-  border-bottom: 1px solid #eaedf1;
-  border-right: 1px solid #eaedf1;
-  color: #70767f;
-}
-.tbl_calendar_telecommuting td:first-child {
-  border-left: 1px solid #eaedf1;
-}
-.tbl_calendar_telecommuting td > div {
-  padding: 5px 0px;
-}
-/* 재택근무 : 일자  header*/
-.tbl_calendar_telecommuting td .date_head {
-}
-.tbl_calendar_telecommuting td .date_head .day {
-  margin-right: 5px;
-}
-.tbl_calendar_telecommuting td .date_head .today {
-  display: inline-block;
-  position: relative;
-  top: -2px;
-  margin-bottom: -4px;
-  padding: 0px;
-  background: #778eea;
-  border-radius: 50%;
-  width: 21px;
-  height: 21px;
-  font-size: 12px;
-  line-height: 20px;
-  color: #fff;
-  text-align: center;
-}
-/* 재택근무 : 일요일, 휴일 글자 색상 설정*/
-.tbl_calendar_telecommuting td:first-child > div,
-.tbl_calendar_telecommuting .day_off .day,
-.tbl_calendar_telecommuting .day_off .day_title {
-  color: #f3374e;
-}
-
-/* 유연근무 - 선택상태 */
-.tbl_calendar td > div.slct {
-  border: 1px solid #009cdf;
-  background: #eef9ff;
-  box-sizing: border-box;
-} /*yellow-->border:1px solid #f7cd64;background:#fff9eb;*/
-
-/* 유연근무 - 소정근로시간*/
-.tbl_calendar .workHour {
-  font-size: 12px;
-  background: #363a54;
-  color: rgba(255, 255, 255, 0.75);
-  height: 21px;
-  border-radius: 15px;
-  text-align: center;
-  line-height: 20px;
-  margin: 5px 5px 2px 5px;
-}
-.tbl_calendar .workHour .broke {
-  color: #ffff00;
-  margin-left: 3px;
-} /*23bdff,ffc800*/
-.tbl_calendar .dutyHour {
-  color: #777;
-  margin-left: 3px;
-  font-size: 12px;
-  padding: 3px 0px;
-  letter-spacing: -0.4px;
-}
-.tbl_calendar .dutyHour:before {
-  content: "";
-  display: inline-block;
-  position: relative;
-  top: -2px;
-  width: 5px;
-  height: 5px;
-  margin-right: 10px;
-  border-radius: 3px;
-  background-color: #7fcd39;
-}
-.broke {
-  text-decoration: line-through;
-}
-.modified {
-  color: #009cdf;
-}
-
-/*
-.tbl_calendar .vacation {display:inline-block;font-size:12px;letter-spacing:-0.4px;padding:0px 0px 0px 18px;background:url('/resources/img/icon/ico_vacation02.png') no-repeat 0px 3px;}
-.tbl_calendar .overtime {display:inline-block;font-size:12px;letter-spacing:-0.4px;padding:0px 0px 0px 18px;background:url('/resources/img/icon/ico_overtime02.png') no-repeat 0px 3px;}
-*/
-.tbl_calendar button.btnDel {
-  width: 12px;
-  height: 12px;
-  /*background: url(/resources/img/btn/btn_input_del.png) no-repeat center;*/
-  font-size: 0;
-  text-indent: -9999em;
-}
-
-/*
-.title_biztrip {display:inline-block;padding-left:18px;background:url('/resources/img/icon/ico_biztrip.png') no-repeat 0px 3px;}
-.title_holiday {display:inline-block;padding-left:18px;background:url('/resources/img/icon/ico_calendar.png') no-repeat 0px 3px;}
-*/
-
-/* 유연근무 - 신청시간,근로시간 관련*/
-.wrapSetHour {
-  font-size: 27px;
-  color: #6f7780;
-}
-.requestFlxTime {
-  display: inline-block;
-  position: relative;
-  padding: 0px;
-  color: #6f7780;
-}
-.requestFlxTime #flexibleApplicationTime {
-  display: inline-block;
-  text-align: right;
-}
-.requestFlxTime .txt {
-  display: block;
-  position: relative;
-  top: -6px;
-  font-size: 12px;
-  text-align: right;
-}
-.totalWorkHour {
-  display: inline-block;
-  position: relative;
-  padding: 0px;
-}
-.totalWorkHour #flexibleWorkTime {
-  display: inline-block;
-  position: relative;
-  padding: 0px;
-}
-.totalWorkHour .txt {
-  display: block;
-  position: relative;
-  top: -6px;
-  font-size: 12px;
-  text-align: right;
-}
-.requestFlxTime .over {
-  color: #fc6f03 !important;
-}
-
-/* 유연근무 신청 : 적용 영역 */
-.apply_area {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
-.apply_area > div {
-  display: table-cell;
-  position: relative;
-  vertical-align: middle;
-}
-.apply_area .box_left {
-  position: relative;
-  height: 100%;
-}
-.apply_area .box_right {
-  position: relative;
-  width: 300px;
-  height: 100%;
-  text-align: center;
 }
