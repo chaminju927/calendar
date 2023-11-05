@@ -8,7 +8,7 @@ function CalendarComponent({ currentMonth }) {
   // const lastWeek = lastDayOfMonth.isoWeek();
 
   // const lastDayOfMonth = currentMonth.clone().endOf("month");
-  const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week();  //이번달 마지막 주
+  const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week(); //이번달 마지막 주
   // const lastDayOfWeek = lastDayOfMonth.day(); // 마지막 날의 요일
 
   useEffect(() => {
@@ -26,10 +26,13 @@ function CalendarComponent({ currentMonth }) {
         const day = firstDayOfMonth.clone().week(week).add(i, "days");
         const isCurrentMonth = day.isSame(currentMonth, "month");
         weekRow.push(
-          <td key={day.format("YYYY-MM-DD")}>
+          <td
+            key={day.format("YYYY-MM-DD")}
+            className={isCurrentMonth ? "current-month" : "other-month"}
+          >
             <div
               className={`day ${
-                isCurrentMonth ? "current-month" : "other-month"
+                day.day() === 0 ? "sun" : day.day() === 6 ? "week" : ""
               }`}
             >
               <span className="day">{day.format("D")}</span>

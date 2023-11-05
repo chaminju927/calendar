@@ -87,16 +87,9 @@
   height: 100%;
   padding: 5px;
 }
-
+.tbl_calendar th.sun,
 .tbl_calendar td.week {
-  background: #f5f5f5;
-  text-align: center;
-  border-bottom: 1px solid #dedede;
-}
-
-.tbl_calendar td.week div label:before {
-  margin-right: 0px;
-  color: #444;
+  color: #ff0000; /* 빨간색 */
 }
 
 .other-month {
