@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-
 //const today = moment().clone();
 
 function MonthComponent({ currentMonth, today }) {
