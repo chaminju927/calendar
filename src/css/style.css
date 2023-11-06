@@ -1,0 +1,143 @@
+@charset "UTF-8";
+/*한글 주석처리시 설정*/
+.calendar_top {
+  text-align: center;
+}
+.calendar_top .Month {
+  font-size: 25px;
+}
+.calendar_top .prev_crcl {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border: 1px solid #cfd3de;
+  border-radius: 50%;
+  text-indent: -9999em;
+}
+.calendar_top .next_crcl {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border: 1px solid #cfd3de;
+  border-radius: 50%;
+  text-indent: -9999em;
+}
+
+.calendar_top .title_calendar {
+  color: #2497cf;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tbl_calendar {
+  border-collapse: collapse;
+  border-spacing: 1;
+  width: 100%;
+  margin-bottom: 1px;
+  border-bottom: 1px solid rgba(54, 58, 84, 0.6);
+}
+
+.tbl_calendar table {
+  width: 100%;
+}
+
+.tbl_calendar th {
+  background: #363a54;
+  color: #fff;
+  text-align: center;
+  border-right: 1px solid #979da5;
+  border-bottom: 1px solid #fff;
+  padding: 6px;
+  font-size: 12px;
+}
+
+.all {
+  border-radius: 15px 0 0 0;
+}
+
+.tbl_calendar th:nth-child(2) {
+  /* border-radius: 15px 0 0 0; */
+  color: #ff0000;
+}
+
+.tbl_calendar th:last-child {
+  border-radius: 0 15px 0 0;
+  color: #85e3df;
+}
+
+tbody td:nth-child(2) .sunday {
+  color: #ff0000;
+}
+
+tbody td:last-child .saturday {
+  color: #2497cf;
+}
+
+.tbl_calendar td.sun {
+  background: #363a54;
+  color: #ff0000;
+}
+
+.tbl_calendar td {
+  border-bottom: 1px solid #eaedf1;
+  border-right: 1px solid #eaedf1;
+  color: #70767f;
+  height: 100px;
+}
+
+.tbl_calendar td > div {
+  color: #70767f;
+  height: 100%;
+  padding: 5px;
+}
+
+.other-month {
+  background: rgba(54, 58, 84, 0.1);
+}
+
+.navi_area {
+  display: inline-block;
+  vertical-align: auto;
+}
+
+.today {
+  color: green;
+  cursor: pointer;
+}
+
+.day_calendar_title {
+  height: 60px;
+}
+.day_calendar_title .day_title {
+  border: 1px solid rgb(237, 235, 232);
+}
+.day_calendar_title .day_blank {
+  width: 80px;
+  border: 1px solid rgb(237, 235, 232);
+}
+
+.day_calendar1 {
+  margin-top: 0;
+  display: flex;
+  flex-direction: row; /*주 축이 수평*/
+  justify-content: flex-start;
+  border: 1px solid black;
+  background-color: inherit;
+  text-align: left;
+}
+.day_calendar1 .box0 {
+  height: 41px;
+  width: 80px;
+  border: 1px solid rgb(237, 235, 232);
+}
+
+.day_calendar2 {
+  margin-top: 0;
+  display: flex;
+  flex-direction: row; /*주 축이 수직*/
+  justify-content: flex-start;
+  border: 1px solid rgb(19, 19, 39);
+  background-color: inherit;
+  text-align: left;
+}/*# sourceMappingURL=style.css.map */
