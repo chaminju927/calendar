@@ -12,7 +12,17 @@ function DayComponent({ currentMonth, today }) {
   const scheduleRow = [];
   // 종일 일정
   const allDaySchedule = () => {
-    allDayRow.push(<span>[차민주] 오후 반차</span>);
+    allDayRow.push(
+      <div>
+        <span>[차민주] 오후 반차</span>
+      </div>
+    );
+    allDayRow.push(
+      <div>
+        <span>[차민주] 오후 반차</span>
+      </div>
+    );
+
     return allDayRow;
   };
   // 시간대별 일정 데이터
@@ -24,33 +34,43 @@ function DayComponent({ currentMonth, today }) {
   };
   // 시간대 출력
   const drawTime = () => {
-    const startTime = today.clone().startOf("day").format("HH:mm");
-    const endTime = today.clone().endOf("day").format("HH:mm");
-    console.log(startTime.clone().format("HH:mm"));
-    console.log(endTime.clone().format("HH:mm"));
-    for (let time = 0; time <= 24; time++) {
+    const startTime = today.clone().startOf("day");
+    const endTime = today.clone().endOf("day");
+    const timeLineRow = [];
+
+    for (
+      let time = startTime.clone();
+      time.isSameOrBefore(endTime);
+      time.add(1, "hours")
+    ) {
       timeLineRow.push(
-        <div>
-          <span id>{startTime.clone().format("HH:mm")}</span>
+        <div key={time.format("HH:mm")} className="timeBox">
+          <span>{time.format("HH:mm")}</span>
         </div>
       );
-
-      startTime.clone().add(1, "hours");
     }
+
     return timeLineRow;
   };
+
   return (
     <div>
       <div className="day_calendar_title">
         <div className="day_blank"></div>
-        <div className="day_title">{today.format("DD")}월요일</div>
+        <div className="day_title">
+          <span>
+            {today.format("DD")} {today.format("dddd")}
+          </span>
+        </div>
       </div>
       <div className="day_calendar1">
         <div className="box0">종일</div>
-        <div className="box1">{/* <div>{allDaySchedule()}</div> */}</div>
+        <div className="box1">
+          <div>{allDaySchedule()}</div>
+        </div>
       </div>
       <div className="day_calendar2">
-        <div className="box2 timezone">{drawTime()}</div>
+        <div className="box2">{drawTime()}</div>
         <div className="box3">
           {/* <div className="day_container">{drawDayTable()}</div> */}
         </div>

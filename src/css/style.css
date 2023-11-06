@@ -23,13 +23,6 @@
   text-indent: -9999em;
 }
 
-.calendar_top .title_calendar {
-  color: #2497cf;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1;
-}
-
 .tbl_calendar {
   border-collapse: collapse;
   border-spacing: 1;
@@ -102,19 +95,32 @@ tbody td:last-child .saturday {
 }
 
 .today {
-  color: green;
-  cursor: pointer;
+  background-color: rgb(143, 215, 143);
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .day_calendar_title {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row; /*주 축이 수평*/
+  justify-content: flex-start;
+  background-color: #f1f3f9;
+  text-align: left;
+  align-items: center;
   height: 60px;
-}
-.day_calendar_title .day_title {
-  border: 1px solid rgb(237, 235, 232);
 }
 .day_calendar_title .day_blank {
   width: 80px;
-  border: 1px solid rgb(237, 235, 232);
+}
+.day_calendar_title .day_title {
+  font-size: 20px;
+  padding-left: 10px;
 }
 
 .day_calendar1 {
@@ -122,14 +128,26 @@ tbody td:last-child .saturday {
   display: flex;
   flex-direction: row; /*주 축이 수평*/
   justify-content: flex-start;
-  border: 1px solid black;
+  height: 60px;
   background-color: inherit;
   text-align: left;
+  align-items: center;
 }
 .day_calendar1 .box0 {
-  height: 41px;
-  width: 80px;
+  height: 60px;
+  width: 30%;
+  text-align: center;
   border: 1px solid rgb(237, 235, 232);
+  display: flex;
+  align-items: center;
+}
+.day_calendar1 .box1 {
+  height: 60px;
+  width: 80%;
+  padding-left: 10px;
+  border: 1px solid rgb(237, 235, 232);
+  display: flex;
+  align-items: center;
 }
 
 .day_calendar2 {
@@ -137,7 +155,25 @@ tbody td:last-child .saturday {
   display: flex;
   flex-direction: row; /*주 축이 수직*/
   justify-content: flex-start;
-  border: 1px solid rgb(19, 19, 39);
   background-color: inherit;
   text-align: left;
+}
+.day_calendar2 .box2 {
+  width: 30%;
+  height: 60px;
+}
+.day_calendar2 .box2 .timeBox {
+  padding-left: 10%;
+  height: 60px;
+  font-size: 17px;
+  border: 1px solid rgb(237, 235, 232);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding-left: 10%;
+}
+.day_calendar2 .box3 {
+  height: 60px;
+  width: 80%;
+  border: 1px solid rgb(237, 235, 232);
 }/*# sourceMappingURL=style.css.map */
