@@ -14,23 +14,26 @@ const selectType = {
 };
 const now = moment();
 const today = moment();
-const nowYYYYMM = now.format("YYYY.MM");
+const nowString = now.format("YYYY.MM");
 
 function TopComponent() {
   const [currentMonth, setCurrentMonth] = useState(now);
   const [calendarType, setCalendarType] = useState(selectType.MONTH); //selectBox
-  const [currentString, setCurrentString] = useState(nowYYYYMM);
+  const [currentString, setCurrentString] = useState(nowString);
 
   const prevMonth = () => {
-    const prev = currentMonth.subtract(1, "month");
+    const prev = currentMonth.subtract(1, "month").clone();
     const prevString = prev.format("YYYY.MM");
+    console.log(prev);
+    console.log(prevString);
     setCurrentString(prevString);
     setCurrentMonth(prev);
   };
 
   const nextMonth = () => {
-    const next = currentMonth.add(1, "month");
+    const next = currentMonth.add(1, "month").clone();
     const nextString = next.format("YYYY.MM");
+    console.log(nextString);
     setCurrentMonth(next);
     setCurrentString(nextString);
   };

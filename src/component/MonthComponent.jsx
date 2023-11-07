@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 //const today = moment().clone();
+// 일요일부터 시작하도록 moment.js 설정 변경
+moment.updateLocale("en", {
+  week: {
+    dow: 0, // 일요일을 주의 첫날로 설정
+  },
+});
 
 function MonthComponent({ currentMonth, today }) {
-  const [current, setCurrent] = useState(currentMonth);
+  const [current, setCurrent] = useState(moment(currentMonth));
+
   // 이번달 첫 주의 시작 일자(일요일=0 부터 시작)
-  const firstDayOfMonth = current.startOf("month").weekday(0);
+  const firstDayOfMonth = current.startOf("month");
   // 이번달 첫 주
   const firstWeek = firstDayOfMonth.week();
   // 이번달 마지막 주의 마지막 일자
@@ -15,51 +23,37 @@ function MonthComponent({ currentMonth, today }) {
   const [calendar, setCalendar] = useState([]);
 
   useEffect(() => {
+    console.log(currentMonth);
     drawTable();
+    console.log(current);
   }, [current]);
 
   const drawTable = () => {
-    for (let week = firstWeek; week <= 48; week++) {
-      for (let i = 0; i < 7; i++) {
-        var days = firstDayOfMonth
-          .startOf("week")
-          .add(i, "days")
-          .format("YY.MM.DD");
-        setCalendar([...calendar, ...days, days]);
-        console.log(days);
+    console.log(firstWeek);
+    console.log(lastWeek);
+    console.log(firstDayOfMonth);
+    console.log(lastDayOfMonth);
+    const newCalendar = [];
+    for (let week = firstWeek; week <= lastWeek; week++) {
+      const weekRow = [];
+      for (let i = 0; i < 8; i++) {
+        var day = firstDayOfMonth.startOf("week").add(i, "days");
+        const isCurrentMonth = day.isSame(current, "month");
+        const isToday = day.isSame(moment(), "day");
+        if (i !== 0) {
+          weekRow.push({
+            key: day.format("YYYY-MM-DD"),
+            className: isCurrentMonth ? "current-month" : "other-month",
+            day: day.format("DD"),
+            isToday: isToday,
+          });
+        } else {
+          weekRow.push({ key: `empty-${week}`, className: "current-month" });
+        }
       }
-      week++;
+      newCalendar.push({ week: week, weekRow: weekRow });
     }
-    //const weekRow = [];
-    //공란
-    // weekRow.push(<td className="current-month"></td>);
-    // for (let i = 0; i < 7; i++) {
-    //   const day = firstDayOfMonth.week(week).add(i, "days");
-    //   const isCurrent = day.isSame(current, "month");
-    //   const isToday = day.isSame(today, "day");
-    //   // console.log(day);
-    //   weekRow.push(
-    //     <td
-    //       key={day.format("YYYY-MM-DD")}
-    //       className={isCurrent ? "current-month" : "other-month"}
-    //     >
-    //       <div
-    //         className={`${
-    //           day.day() === 0
-    //             ? "sunday"
-    //             : day.day() === 6
-    //             ? "saturday"
-    //             : "weekday"
-    //         }`}
-    //       >
-    //         <span className={isToday ? "today" : ""}>{day.format("D")}</span>
-    //       </div>
-    //     </td>
-    //   );
-    // }
-    //calendarTable.push(<tr key={week}>{weekRow}</tr>);
-    // }
-    // return calendarTable;
+    setCalendar(newCalendar);
   };
 
   return (
@@ -79,15 +73,23 @@ function MonthComponent({ currentMonth, today }) {
             </tr>
           </thead>
           <tbody id="FlexCalendar">
-            <tr>
-              <td className="current-month"></td>
-              {/* {calendar.map((date)=> ) */}
-              <td>
-                <div>
-                  <span>{calendar}</span>
-                </div>
-              </td>
-            </tr>
+            {calendar.map((week) => (
+              <tr key={week.week}>
+                {week.weekRow.map((day) => (
+                  <td key={day.key} className={day.className}>
+                    <div
+                      className={`${
+                        day.key === "YY.MM.DD" ? "sunday" : "weekday"
+                      }`}
+                    >
+                      <span className={day.isToday ? "today" : ""}>
+                        {day.day}
+                      </span>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
