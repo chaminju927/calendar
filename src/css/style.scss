@@ -1,5 +1,7 @@
 @charset "UTF-8"; /*한글 주석처리시 설정*/
 
+$border: 1px solid #70767f;
+
 .calendar_top {
   text-align: center;
   .Month {
@@ -26,12 +28,6 @@
     text-indent: -9999em;
   }
 }
-
-// .calendar_top .title_calendar {
-//   font-size: 24px;
-//   font-weight: 700;
-//   line-height: 1;
-// }
 
 .tbl_calendar {
   border-collapse: collapse;
@@ -103,7 +99,7 @@ tbody td:last-child .saturday {
 }
 
 .today {
-  background-color: rgb(143, 215, 143);
+  background-color: rgb(48, 48, 189);
   color: white;
   border-radius: 50%;
   width: 30px;
@@ -118,7 +114,7 @@ tbody td:last-child .saturday {
   display: flex;
   flex-direction: row; /*주 축이 수평*/
   justify-content: flex-start;
-  background-color: #f1f3f9;
+  background-color: rgb(250, 249, 248);
   text-align: left;
   align-items: center;
   height: 60px;
@@ -127,67 +123,110 @@ tbody td:last-child .saturday {
   }
   .day_title {
     font-size: 20px;
-    padding-left: 10px;
+    //padding-left: 10px;
+    display: inline-block;
+    .day_today {
+      background-color: rgb(18, 93, 230);
+      color: white;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
   }
 }
 .day_calendar1 {
   margin-top: 0;
-  display: flex;
-  flex-direction: row; /*주 축이 수평*/
-  justify-content: flex-start;
+  //display: flex;
+  //flex-direction: row; /*주 축이 수직*/
+  //justify-content: flex-start;
   // border-top: none !important;
-  // border-bottom: 1px solid rgb(237, 235, 232);
+  border: $border;
   height: 60px;
+  width: 100%;
   background-color: inherit;
   text-align: left;
   align-items: center;
-  .box0 {
-    height: 60px;
-    width: 30%;
+  .allDay {
+    width: 40px;
     text-align: center;
-    border: 1px solid rgb(237, 235, 232);
-    display: flex;
+    border: $border;
     align-items: center;
-    //padding-left: 10%;
   }
-  .box1 {
-    height: 60px;
-    width: 80%;
-    padding-left: 10px;
-    border: 1px solid rgb(237, 235, 232);
+  //종일 일정 컨테이너
+  .container1 {
+    flex-direction: column;
     display: flex;
-    align-items: center;
+    justify-content: flex-start;
+    border: $border;
+    .item0 {
+      height: 60px;
+      width: 90%;
+      padding-left: 10px;
+      border: $border;
+      display: flex;
+      align-items: center;
+    }
   }
 }
 .day_calendar2 {
+  color: #979da5;
   margin-top: 0;
-  display: flex;
-  flex-direction: row; /*주 축이 수직*/
-  justify-content: flex-start;
+  // display: flex;
+  // flex-direction: row; /*주 축이 수직*/
+  // justify-content: flex-start;
   // overflow-y: scroll;
   // border-top: none !important;
-  // border-bottom: 1px solid rgb(237, 235, 232);
-  //border: 1px solid rgb(237, 235, 232);
+  // border-bottom: $border
+  border: $border;
   background-color: inherit;
-  text-align: left;
-  .box2 {
-    width: 30%;
+  //text-align: left;
+  .timeLine {
+    // float: left;
+    width: 80px;
     height: 60px;
+    font-size: 11px;
     // border-bottom: none !important;
     .timeBox {
       padding-left: 10%;
-      height: 60px;
-      font-size: 17px;
-      border: 1px solid rgb(237, 235, 232);
+      height: 30px;
+      font-size: 15px;
+      border: $border;
       display: flex;
       align-items: center;
       text-align: center;
       padding-left: 10%;
     }
+    .blankTime {
+      height: 30px;
+      border: $border;
+    }
   }
-  .box3 {
+  .item3 {
     height: 60px;
     width: 80%;
-    border: 1px solid rgb(237, 235, 232);
+    border: $border;
+    .time_schedule {
+      .schedule_container {
+        padding-left: 10%;
+        // height: 30px;
+        font-size: 15px;
+        border: $border;
+        // display: flex;
+        align-items: center;
+        // text-align: center;
+        padding-left: 10%;
+        .schedule1 {
+          height: 30px;
+          border: $border;
+        }
+      }
+      .middle-time {
+        border: $bottom;
+        height: 30px;
+      }
+    }
   }
 }
