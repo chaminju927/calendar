@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MonthComponent from "./MonthComponent";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -17,12 +17,19 @@ const today = moment();
 const nowString = now.format("YYYY.MM");
 
 function TopComponent() {
+  debugger;
+  
   const [currentMonth, setCurrentMonth] = useState(now);
   const [calendarType, setCalendarType] = useState(selectType.MONTH); //selectBox
   const [currentString, setCurrentString] = useState(nowString);
 
+  useEffect(() => {
+    console.log(now);
+    console.log(currentMonth);
+  }, []);
   const prevMonth = () => {
-    const prev = currentMonth.subtract(1, "month").clone();
+    console.log(currentMonth);
+    const prev = currentMonth.subtract(1, "month");
     const prevString = prev.format("YYYY.MM");
     console.log(prev);
     console.log(prevString);
@@ -31,7 +38,8 @@ function TopComponent() {
   };
 
   const nextMonth = () => {
-    const next = currentMonth.add(1, "month").clone();
+    console.log(currentMonth);
+    const next = currentMonth.add(1, "month");
     const nextString = next.format("YYYY.MM");
     console.log(nextString);
     setCurrentMonth(next);
