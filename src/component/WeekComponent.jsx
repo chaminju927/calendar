@@ -1,6 +1,4 @@
-import Grid from '@mui/material/Grid';
-
-function WeekComponent({currentMonth, today}) {
+function WeekComponent({ today }) {
   const weekTable = [];
 
   return (
@@ -20,15 +18,11 @@ function WeekComponent({currentMonth, today}) {
           </thead>
           <tbody id="weekTable">
             <td>
-                <div>
-                    <span>
-
-                    </span>
-                </div>
+              <div>
+                <span></span>
+              </div>
             </td>
-            <td>
-
-            </td>
+            <td></td>
           </tbody>
         </table>
       </div>

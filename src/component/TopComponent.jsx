@@ -13,41 +13,30 @@ const selectType = {
   DAY: "day",
 };
 const now = moment();
-const today = moment();
-const nowString = now.format("YYYY.MM");
-
 function TopComponent() {
-  debugger;
-  
-  const [currentMonth, setCurrentMonth] = useState(now);
+  const [current, setCurrent] = useState(now);
+  const [currentString, setCurrentString] = useState();
+
   const [calendarType, setCalendarType] = useState(selectType.MONTH); //selectBox
-  const [currentString, setCurrentString] = useState(nowString);
+  // const [currentString, setCurrentString] = useState(
+  //   currentMonth.format("YYYY.MM")
+  // );
 
   useEffect(() => {
-    console.log(now);
-    console.log(currentMonth);
-  }, []);
+    setCurrentString(current.format("YYYY.MM"));
+  }, [current]);
+
   const prevMonth = () => {
-    console.log(currentMonth);
-    const prev = currentMonth.subtract(1, "month");
-    const prevString = prev.format("YYYY.MM");
-    console.log(prev);
-    console.log(prevString);
-    setCurrentString(prevString);
-    setCurrentMonth(prev);
+    setCurrent(current.clone().subtract(1, "month"));
+    setCurrentString(current.format("YYYY.MM"));
   };
 
   const nextMonth = () => {
-    console.log(currentMonth);
-    const next = currentMonth.add(1, "month");
-    const nextString = next.format("YYYY.MM");
-    console.log(nextString);
-    setCurrentMonth(next);
-    setCurrentString(nextString);
+    setCurrent(current.clone().add(1, "month"));
+    setCurrentString(current.format("YYYY.MM"));
   };
 
   const inputType = (e) => {
-    //console.log(e.target.value);
     setCalendarType(e.target.value);
   };
 
@@ -73,11 +62,11 @@ function TopComponent() {
       </div>
       <div className="calendar_box">
         {calendarType === selectType.MONTH ? (
-          <MonthComponent currentMonth={currentMonth} today={today} />
+          <MonthComponent currentMonth={current} />
         ) : calendarType === selectType.WEEK ? (
-          <WeekComponent currentMonth={currentMonth} today={today} />
+          <WeekComponent />
         ) : (
-          <DayComponent currentMonth={currentMonth} today={today} />
+          <DayComponent />
         )}
       </div>
     </div>

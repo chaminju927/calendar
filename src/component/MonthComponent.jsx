@@ -1,34 +1,24 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
 
-// 일요일부터 시작하도록 moment.js 설정 변경
-// moment.updateLocale("en", {
-//   week: {
-//     dow: 0, // 일요일을 주의 첫날로 설정
-//   },
-// });
-function MonthComponent({ currentMonth, today }) {
-  const [current, setCurrent] = useState(currentMonth.week(0));
+function MonthComponent({ currentMonth }) {
+  // const [current, setCurrent] = useState(currentMonth);
   // 이번달 첫 주의 시작 일자(일요일=0 부터 시작)
-  const [firstDayOfMonth, setFirstDayOfMonth] = useState(
-    current.startOf("month")
-  );
+  const firstDayOfMonth = currentMonth.clone().startOf("month").startOf("week");
   // 이번달 첫 주
-  const [firstWeek, setFirstWeek] = useState(firstDayOfMonth.week());
+  const firstWeek = firstDayOfMonth.week();
   // 이번달 마지막 주의 마지막 일자
-  const [lastDayOfMonth, setLastDayOfMonth] = useState(current.endOf("month"));
+  const lastDayOfMonth = currentMonth.clone().endOf("month");
   // 이번달 마지막 주 (12월 마지막주가 1월로 넘어갈 경우 총 53주)
-  const [lastWeek, setLastWeek] = useState(
-    lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week()
-  );
+  const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week();
   const [calendar, setCalendar] = useState([]);
   //const [week, setWeek] = useState()
 
   useEffect(() => {
-    console.log(currentMonth);
-    console.log(current);
+    // console.log(currentMonth);
+    // console.log(current);
     drawTable();
-  }, [current]);
+  }, [currentMonth]);
 
   const drawTable = () => {
     console.log(firstWeek);
@@ -40,7 +30,7 @@ function MonthComponent({ currentMonth, today }) {
       const weekRow = [];
       for (let i = 0; i < 8; i++) {
         var day = firstDayOfMonth.startOf("week").add(i, "days");
-        const isCurrentMonth = day.isSame(current, "month");
+        const isCurrentMonth = day.isSame(currentMonth, "month");
         const isToday = day.isSame(moment(), "day");
         if (i !== 0) {
           weekRow.push({
@@ -57,7 +47,6 @@ function MonthComponent({ currentMonth, today }) {
     }
     setCalendar(newCalendar);
   };
-
   return (
     <div>
       <div className="tbl_calendar">
