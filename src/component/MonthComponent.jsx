@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import moment from "moment";
+import { SentimentNeutralTwoTone } from "@mui/icons-material";
 
-function MonthComponent({ currentMonth }) {
-  // const [current, setCurrent] = useState(currentMonth);
+const MonthComponent = memo(function MonthComponent({ current }) {
+  const [calendar, setCalendar] = useState([]);
+  const [newCurrent, setNewCurrent] = useState(current);
   // 이번달 첫 주의 시작 일자(일요일=0 부터 시작)
-  const firstDayOfMonth = currentMonth.clone().startOf("month").startOf("week");
+  const firstDayOfMonth =
+    //current.clone().
+    moment(newCurrent).startOf("month").startOf("week");
   // 이번달 첫 주
   const firstWeek = firstDayOfMonth.week();
   // 이번달 마지막 주의 마지막 일자
-  const lastDayOfMonth = currentMonth.clone().endOf("month");
+  const lastDayOfMonth = moment(newCurrent).endOf("month").endOf("week");
   // 이번달 마지막 주 (12월 마지막주가 1월로 넘어갈 경우 총 53주)
   const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week();
-  const [calendar, setCalendar] = useState([]);
-  //const [week, setWeek] = useState()
 
   useEffect(() => {
-    // console.log(currentMonth);
-    // console.log(current);
     drawTable();
-  }, [currentMonth]);
+  }, [current]);
 
   const drawTable = () => {
     console.log(firstWeek);
@@ -26,17 +26,18 @@ function MonthComponent({ currentMonth }) {
     console.log(firstDayOfMonth);
     console.log(lastDayOfMonth);
     const newCalendar = [];
+
     for (let week = firstWeek; week <= lastWeek; week++) {
       const weekRow = [];
       for (let i = 0; i < 8; i++) {
-        var day = firstDayOfMonth.startOf("week").add(i, "days");
-        const isCurrentMonth = day.isSame(currentMonth, "month");
-        const isToday = day.isSame(moment(), "day");
         if (i !== 0) {
+          var day = firstDayOfMonth.startOf("week").add(i - 1, "days");
+          const isCurrentMonth = day.isSame(newCurrent, "month");
+          const isToday = day.isSame(moment(), "day");
           weekRow.push({
             key: day.format("YYMMDD"),
             className: isCurrentMonth ? "current-month" : "other-month",
-            day: day.format("DD"),
+            day: day.format("DD") < 10 ? day.format("D") : day.format("DD"),
             isToday: isToday,
           });
         } else {
@@ -86,6 +87,6 @@ function MonthComponent({ currentMonth }) {
       </div>
     </div>
   );
-}
+});
 
 export default MonthComponent;

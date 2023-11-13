@@ -110,7 +110,7 @@ tbody td:last-child .saturday {
   display: flex;
   flex-direction: row; /*주 축이 수평*/
   justify-content: flex-start;
-  background-color: #f1f3f9;
+  background-color: rgb(250, 249, 248);
   text-align: left;
   align-items: center;
   height: 60px;
@@ -123,7 +123,7 @@ tbody td:last-child .saturday {
   display: inline-block;
 }
 .day_calendar_title .day_title .day_today {
-  background-color: rgb(48, 48, 189);
+  background-color: rgb(18, 93, 230);
   color: white;
   border-radius: 50%;
   width: 30px;
@@ -136,55 +136,181 @@ tbody td:last-child .saturday {
 .day_calendar1 {
   margin-top: 0;
   display: flex;
-  flex-direction: row; /*주 축이 수평*/
-  justify-content: flex-start;
+  box-sizing: content-box;
+  border: 1px solid #979da5;
+  border-bottom: none !important;
   height: 60px;
+  width: 100%;
   background-color: inherit;
   text-align: left;
   align-items: center;
 }
-.day_calendar1 .box0 {
-  height: 60px;
-  width: 40px;
+.day_calendar1 .allDay {
+  width: 80px;
   text-align: center;
-  border: 1px solid rgb(237, 235, 232);
-  display: flex;
   align-items: center;
-  padding-left: 10%;
+  font-size: 0.8em;
 }
-.day_calendar1 .box1 {
-  height: 60px;
+.day_calendar1 .container1 {
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid #979da5;
+  border-right: none !important;
+  box-sizing: content-box;
   width: 90%;
+}
+.day_calendar1 .container1 .items {
+  flex-direction: column;
+  width: 100%;
+  height: 60px;
   padding-left: 10px;
-  border: 1px solid rgb(237, 235, 232);
   display: flex;
   align-items: center;
 }
+.day_calendar1 .container1 .items .item {
+  background-color: #eaedf1;
+  margin-top: 5px;
+  font-size: 0.8em;
+  width: 100%;
+  height: 20px;
+}
+
 .day_calendar2 {
   margin-top: 0;
+  box-sizing: content-box;
   display: flex;
-  flex-direction: row; /*주 축이 수직*/
-  justify-content: flex-start;
+  border: 1px solid #979da5;
+  border-collapse: collapse;
+  border-left: none !important;
   background-color: inherit;
-  text-align: left;
+  height: 100%;
 }
-.day_calendar2 .box2 {
-  width: 14%;
-  height: 60px;
+.day_calendar2 .timeLine {
+  width: 80px;
+  color: #979da5;
+  height: 100%;
   font-size: 11px;
 }
-.day_calendar2 .box2 .timeBox {
+.day_calendar2 .timeLine .timeBox {
   padding-left: 10%;
-  height: 60px;
-  font-size: 17px;
-  border: 1px solid rgb(237, 235, 232);
+  font-size: 15px;
+  border: 1px solid #979da5;
   display: flex;
   align-items: center;
   text-align: center;
+  vertical-align: center;
   padding-left: 10%;
 }
-.day_calendar2 .box3 {
-  height: 60px;
-  width: 80%;
-  border: 1px solid rgb(237, 235, 232);
+.day_calendar2 .timeLine .timeBox #times {
+  height: 50px;
+}
+.day_calendar2 .timeLine .blankTime {
+  height: 30px;
+  border: 1px solid #979da5;
+}
+.day_calendar2 .schedule_container {
+  height: 100%;
+  width: 90%;
+}
+.day_calendar2 .schedule_container .time_schedule {
+  width: 100%;
+}
+.day_calendar2 .schedule_container .time_schedule .schedule_container {
+  height: 100px;
+  padding-left: 10%;
+  border: 1px solid #979da5;
+  align-items: center;
+  padding-left: 10%;
+}
+.day_calendar2 .schedule_container .time_schedule .schedule_container .schedule1 {
+  height: 50px;
+  width: 100%;
+  border-bottom: 1px solid #979da5;
+}
+.day_calendar2 .schedule_container .time_schedule .before30m {
+  font-size: 0.8em;
+  border-bottom: dotted 1px #979da5;
+  height: 25px;
+  width: 100%;
+}
+.day_calendar2 .schedule_container .time_schedule .after30m {
+  font-size: 0.8em;
+  height: 25px;
+  border-bottom: 1px solid #979da5;
+}
+
+/*WeekComponent*/
+.contentCalendar {
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  min-height: 600px;
+  border: 1px solid #979da5;
+}
+.contentCalendar .weekContainer {
+  border-top: 1px solid rgb(229, 229, 229);
+  border-bottom: 1px solid rgb(237, 235, 232);
+  height: 41px;
+  background-color: inherit;
+  text-align: left;
+}
+.contentCalendar .weekContainer .weekContents {
+  margin-left: 88px;
+  box-sizing: border-box;
+  display: flex;
+}
+.contentCalendar .weekContainer .weekContents #dayTitle {
+  margin-left: 5px;
+}
+.contentCalendar .weekContainer .weekContents .weekendSun {
+  border: 1px solid #979da5;
+  width: 8.3333333333%;
+  left: 0%;
+  line-height: 41px;
+  border-left: solid 1px #edebe8;
+  padding-left: 0;
+}
+.contentCalendar .weekContainer .weekContents .weekdays {
+  width: 16.6666666667%;
+  left: 8.3333333333%;
+  line-height: 41px;
+  border-left: solid 1px #edebe8;
+  padding-left: 0;
+}
+.contentCalendar .weekContainer .weekContents .weekendSat {
+  width: 8.3333333333%;
+  left: 91.6666666667%;
+  line-height: 41px;
+  border-left: solid 1px #edebe8;
+  padding-left: 0;
+}
+.contentCalendar .calendarContainer {
+  height: 625px;
+  position: relative;
+}
+.contentCalendar .calendarContainer .timeZone {
+  width: 80px;
+  color: #979da5;
+  height: 100%;
+  font-size: 11px;
+}
+.contentCalendar .calendarContainer .timeZone .timeBox {
+  padding-left: 10%;
+  font-size: 15px;
+  border: 1px solid #979da5;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  vertical-align: center;
+  padding-left: 10%;
+}
+.contentCalendar .calendarContainer .timeZone .timeBox #times {
+  height: 50px;
+}
+.contentCalendar .calendarContainer .timeZone .blankTime {
+  height: 30px;
+  border: 1px solid #979da5;
+}
+.contentCalendar .calendarContainer .weekSchedule {
+  border: 1px solid #979da5;
 }/*# sourceMappingURL=style.css.map */

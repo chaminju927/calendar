@@ -12,27 +12,47 @@ const selectType = {
   WEEK: "week",
   DAY: "day",
 };
+
 const now = moment();
 function TopComponent() {
   const [current, setCurrent] = useState(now);
   const [currentString, setCurrentString] = useState();
+  const [calendarType, setCalendarType] = useState(selectType.MONTH);
 
-  const [calendarType, setCalendarType] = useState(selectType.MONTH); //selectBox
-  // const [currentString, setCurrentString] = useState(
-  //   currentMonth.format("YYYY.MM")
-  // );
-
+  // 요일 변환
+  const dayConverter = () => {
+    switch (current.day()) {
+      case 0:
+        return "일";
+      case 1:
+        return "월";
+      case 2:
+        return "화";
+      case 3:
+        return "수";
+      case 4:
+        return "목";
+      case 5:
+        return "금";
+      case 6:
+        return "토";
+      default:
+        return "";
+    }
+  };
   useEffect(() => {
     setCurrentString(current.format("YYYY.MM"));
   }, [current]);
 
   const prevMonth = () => {
-    setCurrent(current.clone().subtract(1, "month"));
+    const prev = current;
+    setCurrent(moment(prev).subtract(1, "month"));
     setCurrentString(current.format("YYYY.MM"));
   };
 
   const nextMonth = () => {
-    setCurrent(current.clone().add(1, "month"));
+    const next = current;
+    setCurrent(moment(next).add(1, "month"));
     setCurrentString(current.format("YYYY.MM"));
   };
 
@@ -42,17 +62,32 @@ function TopComponent() {
 
   return (
     <div>
-      <div className="calendar_top">
-        <IconButton onClick={prevMonth}>
-          <KeyboardArrowLeftIcon />
-        </IconButton>
-        <span className="Month" id="dateTxt">
-          {currentString}
-        </span>
-        <IconButton onClick={nextMonth}>
-          <KeyboardArrowRightIcon />
-        </IconButton>
-      </div>
+      {calendarType === selectType.MONTH ? (
+        <div className="calendar_top">
+          <IconButton onClick={prevMonth}>
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+          <span className="Month" id="dateTxt">
+            {currentString}
+          </span>
+          <IconButton onClick={nextMonth}>
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        </div>
+      ) : calendarType === selectType.WEEK ? (
+        <div className="calendar_top">
+          <span className="Month" id="dateTxt">
+            {current.format("YYYY.MM.DD")} -{" "}
+            {moment(current).add(7, "days").format("YYYY.MM.DD")}
+          </span>
+        </div>
+      ) : (
+        <div className="calendar_top">
+          <span className="Month" id="dateTxt">
+            {moment(current).format("YYYY.MM.DD")}
+          </span>
+        </div>
+      )}
       <div>
         <select id="select_term" onChange={inputType}>
           <option value={selectType.MONTH}>월간</option>
@@ -62,11 +97,11 @@ function TopComponent() {
       </div>
       <div className="calendar_box">
         {calendarType === selectType.MONTH ? (
-          <MonthComponent currentMonth={current} />
+          <MonthComponent current={current} />
         ) : calendarType === selectType.WEEK ? (
-          <WeekComponent />
+          <WeekComponent dayConverter={dayConverter} />
         ) : (
-          <DayComponent />
+          <DayComponent dayConverter={dayConverter} />
         )}
       </div>
     </div>
