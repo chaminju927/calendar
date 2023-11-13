@@ -45,15 +45,21 @@ function TopComponent() {
   }, [current]);
 
   const prevMonth = () => {
-    const prev = current;
-    setCurrent(moment(prev).subtract(1, "month"));
-    setCurrentString(current.format("YYYY.MM"));
+    // const prev = current;
+    // setCurrent(moment(prev).subtract(1, "month"));
+    // setCurrentString(current.format("YYYY.MM"));
+    const prev = moment(current).subtract(1, "month");
+    setCurrent(prev);
+    setCurrentString(prev.format("YYYY.MM"));
   };
 
   const nextMonth = () => {
-    const next = current;
-    setCurrent(moment(next).add(1, "month"));
-    setCurrentString(current.format("YYYY.MM"));
+    const next = moment(current).add(1, "month");
+    setCurrent(next);
+    setCurrentString(next.format("YYYY.MM"));
+    // const next = current;
+    // setCurrent(moment(next).add(1, "month"));
+    // setCurrentString(current.format("YYYY.MM"));
   };
 
   const inputType = (e) => {

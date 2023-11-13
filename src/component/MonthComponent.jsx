@@ -31,7 +31,11 @@ const MonthComponent = memo(function MonthComponent({ current }) {
       const weekRow = [];
       for (let i = 0; i < 8; i++) {
         if (i !== 0) {
-          var day = firstDayOfMonth.startOf("week").add(i - 1, "days");
+          // var day = firstDayOfMonth.startOf("week").add(i - 1, "days");
+          // var day = firstDayOfMonth.clone().add(i - 1, "days");
+          var day = firstDayOfMonth
+            .clone()
+            .add((week - firstWeek) * 7 + i - 1, "days");
           const isCurrentMonth = day.isSame(newCurrent, "month");
           const isToday = day.isSame(moment(), "day");
           weekRow.push({
